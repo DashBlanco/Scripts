@@ -1,0 +1,16 @@
+#!/bin/sh
+[ -r /etc/lsb-release ] && . /etc/lsb-release
+
+echo "
+\e[0;33m    _____    \e[0m
+\e[0;33m  .'     '.  \e[0m  \e[0;36mHola SR. Cinco!\e[0m
+\e[0;33m /         \ \e[0m -----------------------
+\e[0;33m|           |\e[0m  \e[1;36m->\e[0m DIOSA:\e[0m \e[1;30mRebeca!\e[0m
+\e[0;33m'.  +^^^+  .'\e[0m  \e[1;36m->\e[0m OBJETIVO:\e[0m \e[1;30mAmarla y mimarla.\e[0m
+\e[0;33m  '. \./ .'  \e[0m  \e[1;36m->\e[0m \e[1;30mComo el trucho a la tucha!\e[0m
+\e[0;37m    |_|_|\e[0m\e[1;30m  ==================================\e[0m
+\e[1;30m    (___)\e[0m   GIT: add | push | pull | status
+\e[1;30m    (___)\e[0m   CMD: bye | 1t
+\e[1;30m    '---'  ==================================\e[0m
+
+"
