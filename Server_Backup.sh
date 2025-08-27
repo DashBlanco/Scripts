@@ -17,9 +17,9 @@ TODAY=`date +"%Y-%m-%d"`
 DB_BACKUP_PATH='/media/backups'
 MYSQL_HOST='localhost'
 MYSQL_PORT='3306'
-MYSQL_USER='dashdb'
-MYSQL_PASSWORD='@-App936Xb!'
-DATABASE_NAME='ProjectLife'
+MYSQL_USER=''
+MYSQL_PASSWORD=''
+DATABASE_NAME=''
 BACKUP_RETAIN_DAYS=1   ## Number of days to keep local backup copy
 
 #################################################################
