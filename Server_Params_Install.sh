@@ -2,8 +2,8 @@
 apt update && apt upgrade -y && apt install curl git -y
 
 ## CONFIGURAMOS TECLADO SI ES NECESARIO
-export LANG=es_ES.UTF-8
-dpkg-reconfigure locales
+## export LANG=es_ES.UTF-8
+##dpkg-reconfigure locales
 
 ## DECORAMOS LA CLI
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh)"
@@ -25,24 +25,24 @@ dpkg -i jdk-23_linux-x64_bin.deb
 rm jdk-23_linux-x64_bin.deb
 java -version
 
-## ELIMINAMOS BASURA EXISTENTE POR DEFECTO
+## ELIMINAMOS BASURA EXISTENTE POR DEFECTO, PREFERIMOS NGINX
 apt remove apache2
 
 ## CREAMOS PARTICION PARA EL DISCO 2T
-fdisk /dev/vdb
-n + enter + enter + w
+## fdisk /dev/vdb
+## n + enter + enter + w
 
 ## FORMATEMAOS PARTICION Y MONTAMOS
-mkfs.ext4 /dev/vdb1 && mkdir -p /media/externo && mount /dev/vdb1 /media/externo
+## mkfs.ext4 /dev/vdb1 && mkdir -p /media/externo && mount /dev/vdb1 /media/externo
 
 ## CONFIGURAMOS FSTAB PARA MONTAJE AUTOMATICO DE LA PARTICION
-blkid
-nano /etc/fstab
+## blkid
+## nano /etc/fstab
 
-UUID=4819cd6d-e448-4958-9425-0b93077dd438 /media/externo ext4 defaults 0 0
+## UUID=4819cd6d-e448-4958-9425-0b93077dd438 /media/externo ext4 defaults 0 0
 
 ## REINICIMAOS Y VERIFICAMOS TODO
-reboot
+## reboot
 
 ## PARCHES VARIOS - STORAGE LARAVEL
 chown -R $USER:www-data storage && chown -R $USER:www-data bootstrap/cache && chown -R $USER:www-data lang && chmod -R 775 storage && chmod -R 775 bootstrap/cache && chmod -R 775 lang
@@ -58,8 +58,8 @@ upload_max_filesize = 64M;
 
 ## CREAMOS USUSARIO PARA MARIADB
 mysql -u root -p
-CREATE USER 'dashdb'@'localhost' IDENTIFIED BY '@-App936Xb!';
-GRANT ALL PRIVILEGES ON * . * TO 'dashdb'@'localhost';
+CREATE USER 'USUARIO'@'localhost' IDENTIFIED BY 'PASSWORD';
+GRANT ALL PRIVILEGES ON * . * TO 'USUARIO'@'localhost';
 FLUSH PRIVILEGES;
 exit;
 
@@ -69,10 +69,10 @@ chmod 777 /media/backups
 
 ## DIARIOS 3AM:
 crontab -e
-00 3 * * * root mysqldump -u dashdb -p@-App936Xb! --all-databases | gzip > /media/backups/$(date +%Y-%m-%d).sql.gz
+00 3 * * * root mysqldump -u USUARIO -pPASSWORD --all-databases | gzip > /media/backups/$(date +%Y-%m-%d).sql.gz
 ## QUINCENALES 3AM:
 crontab -e
-00 3 15 * * root mysqldump -u dashdb -p@-App936Xb! --all-databases | gzip > /media/backups/$(date +%Y-%m-%d).sql.gz
+00 3 15 * * root mysqldump -u USUARIO -pPASSWORD --all-databases | gzip > /media/backups/$(date +%Y-%m-%d).sql.gz
 
 ## REINICIAMOS CRON
 systemctl restart cron
